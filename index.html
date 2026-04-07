@@ -56,13 +56,35 @@
             </div>
         </div>
 
-        <div class="flex justify-around mt-8 pt-4 border-t border-white/5 text-[10px] text-gray-500 uppercase tracking-widest">
-            <div class="flex flex-col items-center gap-1"><span class="text-lg">📱</span>Home</div>
-            <div class="flex flex-col items-center gap-1 text-blue-400 font-bold"><span class="text-lg text-blue-400">🔄</span>Swap</div>
-            <div class="flex flex-col items-center gap-1"><span class="text-lg">🌉</span>Bridge</div>
-            <div class="flex flex-col items-center gap-1"><span class="text-lg">⚙️</span>Settings</div>
+        <div class="flex justify-around mt-8 pt-5 border-t border-white/10 text-[10px] uppercase tracking-[0.1em] font-semibold">
+  
+  <div class="flex flex-col items-center gap-2 group cursor-pointer transition-all duration-300">
+    <i data-lucide="home" class="w-5 h-5 text-white/40 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-all"></i>
+    <span class="text-white/30 group-hover:text-white transition-colors">Home</span>
+  </div>
+
+  <div class="flex flex-col items-center gap-2 group cursor-pointer transition-all duration-300">
+    <i data-lucide="refresh-cw" class="w-5 h-5 text-white/40 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-all"></i>
+    <span class="text-white/30 group-hover:text-white transition-colors">Swap</span>
+  </div>
+
+  <div class="flex flex-col items-center gap-2 group cursor-pointer transition-all duration-300">
+    <i data-lucide="layers" class="w-5 h-5 text-white/40 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-all"></i>
+    <span class="text-white/30 group-hover:text-white transition-colors">Bridge</span>
+  </div>
+
+  <div class="flex flex-col items-center gap-2 group cursor-pointer transition-all duration-300">
+    <i data-lucide="settings" class="w-5 h-5 text-white/40 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-all"></i>
+    <span class="text-white/30 group-hover:text-white transition-colors">Settings</span>
+  </div>
+
         </div>
     </div>
-
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.6.2/dist/ethers.min.js"></script>
+<script src="app.js"></script>
+<script>
+  lucide.createIcons();
+</script>
 </body>
 </html>
