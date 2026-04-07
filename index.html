@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phantom X Delora | Premium Multi-Chain Aggregator</title>
+    <title>Phantom X Delora | Premium Web3 Interface</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -17,16 +17,14 @@
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        dark: '#050914',
-                        'dark-soft': '#101625',
-                        brand: {
-                            blue: '#3b82f6', // blue-500
-                            cyan: '#22d3ee', // cyan-400
-                        }
+                        dark: '#0a0b0d', // Deepest background
+                        'dark-soft': '#141519', // Card background
+                        'brand-blue': '#3b82f6',
+                        'brand-cyan': '#22d3ee',
                     },
                     boxShadow: {
-                        'neon-blue': '0 0 20px rgba(59, 130, 246, 0.3)',
-                        'neon-cyan': '0 0 20px rgba(34, 211, 238, 0.3)',
+                        'neon-cyan': '0 0 15px rgba(34, 211, 238, 0.3)',
+                        'neon-blue': '0 0 20px rgba(59, 130, 246, 0.4)',
                     }
                 }
             }
@@ -35,139 +33,165 @@
     
     <style>
         body { 
-            background: radial-gradient(circle at center, #111827 0%, #050914 100%);
+            background: radial-gradient(circle at center, #1a1c23 0%, #0a0b0d 100%);
             color: white;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Premium Glassmorphism Effect */
+        /* Web3 Premium Glassmorphism */
         .glass { 
-            background: rgba(16, 22, 37, 0.6); 
-            backdrop-filter: blur(20px) saturate(180%); 
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.08); 
+            background: rgba(20, 21, 25, 0.6); 
+            backdrop-filter: blur(15px) saturate(180%); 
+            -webkit-backdrop-filter: blur(15px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.06); 
         }
 
-        /* Subtle Inner Glow for Cards */
-        .premium-card {
+        /* Border Glowing Effect */
+        .neon-border {
             position: relative;
-            overflow: hidden;
         }
-        .premium-card::after {
+        .neon-border::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
-            pointer-events: none;
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.5) 0%, rgba(34, 211, 238, 0.5) 100%);
+            z-index: -1;
+            opacity: 0.15;
         }
 
-        /* Clean Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
+        /* Smooth Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 5px; }
+        
+        /* Navigation Hover Line */
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0%;
+            height: 2px;
+            background-color: #22d3ee;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            box-shadow: 0 0 8px #22d3ee;
+        }
+        .nav-item:hover::after, .nav-item.active::after {
+            width: 100%;
+        }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4 md:p-6 selection:bg-brand-cyan/20">
+<body class="flex justify-center min-h-screen p-4 md:p-6 lg:p-10 pb-28 selection:bg-brand-cyan/20">
 
-    <div class="glass w-full max-w-[440px] rounded-[3rem] p-6 shadow-2xl relative border border-white/10 premium-card">
+    <div class="w-full max-w-[440px] space-y-7 relative">
         
-        <div class="absolute -top-10 -right-10 w-32 h-32 bg-brand-blue/20 rounded-full blur-3xl opacity-70 pointer-events-none"></div>
-        <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-brand-cyan/20 rounded-full blur-3xl opacity-70 pointer-events-none"></div>
-
-        <div class="flex justify-between items-center mb-10 gap-2 relative z-10">
+        <div class="flex justify-between items-center px-2 py-3 glass rounded-full neon-border shadow-neon-blue">
             <div class="flex items-center gap-2.5">
-                <div class="w-2.5 h-6 bg-brand-blue rounded-full shadow-neon-blue"></div>
+                <div class="w-2.5 h-6 bg-brand-cyan rounded-full shadow-neon-cyan"></div>
                 <h1 class="text-xl font-800 tracking-tighter text-white">PHANTOM<span class="text-brand-blue">X</span>DELORA</h1>
             </div>
-            <button id="connect-btn" class="bg-brand-blue hover:bg-brand-blue/90 px-5 py-2.5 rounded-full text-xs font-bold transition-all shadow-lg shadow-brand-blue/20 whitespace-nowrap active:scale-95 flex items-center gap-1.5 border border-brand-blue/50">
-                <i data-lucide="wallet" class="w-3.5 h-3.5"></i>
-                Connect Wallet
-            </button>
+            <div class="flex gap-2">
+                <button id="connect-btn" class="bg-brand-blue hover:bg-brand-blue/90 px-5 py-2.5 rounded-full text-xs font-bold tracking-tight transition-all shadow-lg shadow-brand-blue/20 whitespace-nowrap active:scale-95 flex items-center gap-1.5 border border-brand-blue/40">
+                    <i data-lucide="wallet" class="w-3.5 h-3.5"></i>
+                    Connect Wallet
+                </button>
+            </div>
         </div>
-
-        <div class="space-y-5 relative z-10">
+        <div class="space-y-6">
             
-            <div class="glass rounded-3xl p-5 border border-white/5 premium-card">
-                <div class="flex items-center gap-2 mb-5">
-<i data-lucide="sliders-horizontal" class="w-4 h-4 text-brand-cyan"></i>
-                    <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Preferences</h2>
+            <div class="glass rounded-3xl p-6 relative overflow-hidden">
+                <div class="flex items-center gap-2 mb-6 border-b border-white/5 pb-3">
+                    <i data-lucide="sliders-horizontal" class="w-4 h-4 text-brand-cyan"></i>
+                    <h2 class="text-xs font-bold text-gray-500 uppercase tracking-widest">Interface Settings</h2>
                 </div>
                 
                 <div class="space-y-4">
-                    <div class="flex justify-between items-center p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/5">
+                    <div class="flex justify-between items-center p-3 rounded-xl bg-dark-soft border border-white/5 hover:border-brand-blue/30 transition-colors">
                         <div class="flex items-center gap-3">
-                            <i data-lucide="moon" class="w-5 h-5 text-gray-400"></i>
+                            <i data-lucide="moon-star" class="w-5 h-5 text-gray-400"></i>
                             <div>
-                                <p class="text-sm font-semibold">Interface Theme</p>
-                                <p class="text-[11px] text-gray-500">Dark mode active</p>
+                                <p class="text-sm font-semibold">Appearance</p>
+                                <p class="text-[11px] text-gray-600">Premium Dark active</p>
                             </div>
                         </div>
-                        <button class="bg-dark-soft px-4 py-2 rounded-lg text-xs font-medium border border-white/10 hover:border-brand-blue/50 transition-colors">Switch</button>
+                        <button class="bg-dark px-4 py-2 rounded-lg text-xs font-medium border border-white/10 text-gray-400 hover:text-white hover:border-white/20">Switch Theme</button>
                     </div>
 
-                    <div class="flex justify-between items-center p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border border-white/5">
+                    <div class="flex justify-between items-center p-3 rounded-xl bg-dark-soft border border-white/5 hover:border-brand-cyan/30 transition-colors">
                         <div class="flex items-center gap-3">
                             <i data-lucide="percent" class="w-5 h-5 text-gray-400"></i>
                             <div>
                                 <p class="text-sm font-semibold">Slippage Tolerance</p>
-                                <p class="text-[11px] text-gray-500">Max price movement</p>
+                                <p class="text-[11px] text-gray-600">Adjust max price impact</p>
                             </div>
                         </div>
-                        <div class="bg-brand-cyan/10 px-4 py-2 rounded-lg text-brand-cyan text-xs font-extrabold border border-brand-cyan/30 shadow-neon-cyan">0.5%</div>
+                        <div class="bg-brand-cyan/5 px-4 py-2 rounded-lg text-brand-cyan text-xs font-extrabold border border-brand-cyan/20 shadow-neon-cyan">0.5%</div>
                     </div>
                 </div>
             </div>
 
-            <button id="swap-button" class="group w-full h-[72px] bg-dark-soft text-white font-extrabold py-5 rounded-2xl transition-all flex items-center justify-center gap-3 my-8 relative overflow-hidden border border-brand-blue/30 active:scale-[0.98]">
-                <div class="absolute inset-0 bg-gradient-to-r from-brand-blue to-brand-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                <div class="absolute inset-0 rounded-2xl shadow-inner shadow-black/30 pointer-events-none"></div>
-
-                <div class="relative z-10 flex items-center gap-3 text-lg group-hover:text-dark">
-                    <i data-lucide="repeat" class="w-6 h-6 transition-transform group-hover:rotate-180 duration-500"></i>
-                    <span>Execute Swap</span>
-                </div>
-            </button>
-
-            <div class="glass rounded-3xl p-5 border border-white/5 premium-card">
-                <div class="flex items-center gap-2 mb-4">
-                    <i data-lucide="info" class="w-4 h-4 text-gray-400"></i>
-                    <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Protocol</h2>
+            <div class="glass rounded-3xl p-6">
+                <div class="flex items-center gap-2 mb-6 border-b border-white/5 pb-3">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-gray-500"></i>
+                    <h2 class="text-xs font-bold text-gray-500 uppercase tracking-widest">Protocol Info</h2>
                 </div>
                 
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="w-10 h-10 rounded-full bg-dark-soft border border-white/10 flex items-center justify-center text-brand-blue font-black text-xl shadow-inner shadow-black/20">P</div>
+                <div class="flex items-center gap-3 mb-5 p-3 rounded-xl bg-dark-soft border border-white/5">
+                    <div class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center text-brand-cyan font-black text-2xl shadow-inner shadow-black/30">P</div>
                     <div>
-                        <p class="text-md font-bold text-white">Phantom X Delora</p>
-                        <span class="bg-brand-blue/10 text-brand-blue text-[10px] px-2.5 py-1 rounded-full border border-brand-blue/20 font-bold tracking-tight">Version 1.2.0 (Premium)</span>
+                        <p class="text-lg font-bold text-white tracking-tight">Phantom X Delora</p>
+                        <span class="bg-brand-blue/5 text-brand-blue text-[10px] px-2.5 py-1 rounded-full border border-brand-blue/10 font-bold tracking-wide">Version 1.5.0 (Web3 Pro)</span>
                     </div>
                 </div>
-                <p class="text-[12px] text-gray-500 leading-relaxed font-normal p-1 bg-white/5 rounded-xl border border-white/5">
-                    A personal multi-chain liquidity interface built by <b class="text-gray-300">0xblackphantom</b>. Optimized for premium swap and bridge performance, powered by Delora Protocol.
+                
+                <p class="text-[12px] text-gray-500 leading-relaxed font-normal p-3 bg-white/5 rounded-xl border border-white/5 mb-8">
+                    An advanced multi-chain liquidity interface built by <b class="text-gray-300">Phantom</b>. Optimized for premium swap and bridge performance, powered by Delora Protocol.
                 </p>
+
+                <div class="grid grid-cols-3 gap-3">
+                    <a href="#" target="_blank" class="group flex flex-col items-center gap-2.5 p-4 rounded-xl glass border border-white/5 hover:border-brand-blue/40 transition-all hover:-translate-y-1">
+                        <i data-lucide="github" class="w-6 h-6 text-gray-600 group-hover:text-white group-hover:drop-shadow-[0_0_8px_white]"></i>
+                        <span class="text-[10px] font-semibold text-gray-600 group-hover:text-white">GitHub</span>
+                    </a>
+                    <a href="#" target="_blank" class="group flex flex-col items-center gap-2.5 p-4 rounded-xl glass border border-white/5 hover:border-brand-blue/40 transition-all hover:-translate-y-1">
+                        <i data-lucide="send" class="w-6 h-6 text-gray-600 group-hover:text-brand-blue group-hover:drop-shadow-[0_0_8px_#3b82f6]"></i>
+                        <span class="text-[10px] font-semibold text-gray-600 group-hover:text-brand-blue">Telegram</span>
+                    </a>
+                    <a href="#" target="_blank" class="group flex flex-col items-center gap-2.5 p-4 rounded-xl glass border border-white/5 hover:border-brand-blue/40 transition-all hover:-translate-y-1">
+                        <i data-lucide="twitter" class="w-6 h-6 text-gray-600 group-hover:text-brand-cyan group-hover:drop-shadow-[0_0_8px_#22d3ee]"></i>
+                        <span class="text-[10px] font-semibold text-gray-600 group-hover:text-brand-cyan">Twitter / X</span>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <div class="flex justify-around items-center mt-12 pt-7 border-t border-white/5 w-full relative z-10">
-            <div class="flex flex-col items-center gap-1.5 group cursor-pointer">
-                <i data-lucide="layers-3" class="w-5 h-5 text-white/40 group-hover:text-brand-cyan transition-colors"></i>
-                <span class="text-[10px] uppercase font-700 text-white/20 tracking-tight group-hover:text-brand-cyan">DEX</span>
+        <div class="fixed bottom-6 left-4 right-4 max-w-[400px] mx-auto glass rounded-full p-3 px-6 shadow-2xl z-50 neon-border border border-white/10 flex justify-between items-center">
+            
+            <div class="nav-item group flex flex-col items-center gap-1 cursor-pointer relative py-1">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 text-gray-600 group-hover:text-white transition-colors"></i>
+                <span class="text-[9px] uppercase font-bold text-gray-600 tracking-tighter group-hover:text-white">Home</span>
             </div>
 
-            <div class="flex flex-col items-center gap-1.5 cursor-pointer relative">
-                <i data-lucide="repeat" class="w-6 h-6 text-brand-blue shadow-neon-blue"></i>
-                <span class="text-[10px] uppercase font-800 text-brand-blue tracking-tight">Swap</span>
-                <div class="absolute -bottom-7 w-1 h-1 bg-brand-blue rounded-full shadow-neon-blue"></div>
+            <div id="swap-button" class="nav-item active flex flex-col items-center gap-1.5 cursor-pointer relative py-1">
+                <i data-lucide="repeat-2" class="w-6 h-6 text-brand-cyan drop-shadow-[0_0_8px_#22d3ee]"></i>
+                <span class="text-[9px] uppercase font-900 text-brand-cyan tracking-tight">Swap</span>
             </div>
 
-            <div class="flex flex-col items-center gap-1.5 group cursor-pointer">
-                <i data-lucide="unplug" class="w-5 h-5 text-white/40 group-hover:text-brand-cyan transition-colors"></i>
-                <span class="text-[10px] uppercase font-700 text-white/20 tracking-tight group-hover:text-brand-cyan">Bridge</span>
+            <div class="nav-item group flex flex-col items-center gap-1 cursor-pointer relative py-1">
+                <i data-lucide="git-merge" class="w-5 h-5 text-gray-600 group-hover:text-white transition-colors"></i>
+                <span class="text-[9px] uppercase font-bold text-gray-600 tracking-tighter group-hover:text-white">Bridge</span>
             </div>
 
-            <div class="flex flex-col items-center gap-1.5 group cursor-pointer">
-                <i data-lucide="settings-2" class="w-5 h-5 text-white/40 group-hover:text-brand-cyan transition-colors"></i>
-                <span class="text-[10px] uppercase font-700 text-white/20 tracking-tight group-hover:text-brand-cyan">Config</span>
+            <div class="nav-item group flex flex-col items-center gap-1 cursor-pointer relative py-1">
+                <i data-lucide="history" class="w-5 h-5 text-gray-600 group-hover:text-white transition-colors"></i>
+                <span class="text-[9px] uppercase font-bold text-gray-600 tracking-tighter group-hover:text-white">History</span>
+            </div>
+
+            <div class="nav-item group flex flex-col items-center gap-1 cursor-pointer relative py-1">
+                <i data-lucide="settings-2" class="w-5 h-5 text-gray-600 group-hover:text-white transition-colors"></i>
+                <span class="text-[9px] uppercase font-bold text-gray-600 tracking-tighter group-hover:text-white">Settings</span>
             </div>
         </div>
 
@@ -175,7 +199,7 @@
 
     <script src="app.js"></script>
     <script>
-        // Inisialisasi Ikon Lucide (Modern Icons)
+        // Inisialisasi Modern Lucide Icons
         lucide.createIcons();
     </script>
 </body>
